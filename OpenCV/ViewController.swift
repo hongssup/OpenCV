@@ -9,10 +9,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var sourceView: UIImageView!
+    @IBOutlet weak var targetView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        targetView.image = OpenCVWrapper.toGray(sourceView.image!)
     }
+    
 
 
 }
