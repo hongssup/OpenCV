@@ -30,4 +30,32 @@
     return MatToUIImage(grayMat);
                  
 }
+
++ (UIImage *)getContours:(UIImage *)image {
+    cv::Mat imageMat;
+    UIImageToMat(image, imageMat);
+    //Convert to gray
+    cv::Mat grayMat;
+    cv::cvtColor(imageMat, grayMat, cv::COLOR_BGR2GRAY);
+    //Detect edges using Threshold(임계값)
+    cv::Mat threshold_output;
+    cv::threshold(grayMat, threshold_output, 130.0, 255.0, cv::THRESH_BINARY);
+    //Find Contours to find chains of consecutive edge pixels
+    std::vector<std::vector<cv::Point>> contours;
+    std::vector<cv::Vec4i> hierarchy;
+    cv::findContours(threshold_output, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
+    
+    for (int i = 0; i < contours.size(); i++) {
+        double epsilon = cv::arcLength(contours[i], true) * 0.02;
+        cv::approxPolyDP(contours[i], contours[i], epsilon, true);
+
+        if (10000 < contourArea(contours[i]) && contourArea(contours[i]) < 60000) {
+            //Draw contours on image
+            cv::drawContours(threshold_output, contours, i, cv::Scalar(0,255,0), 10);
+            cv::boundingRect(contours[i]);
+        }
+    }
+    return MatToUIImage(threshold_output);
+}
+
 @end

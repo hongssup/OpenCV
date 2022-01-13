@@ -15,7 +15,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        targetView.image = OpenCVWrapper.toGray(sourceView.image!)
+        //targetView.image = OpenCVWrapper.toGray(sourceView.image!)
+        targetView.image = OpenCVWrapper.getContours(sourceView.image!)
     }
     
 

@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 //Define here interface with OpenCV
 
 //Function to convert an image to grayscale
-+(UIImage *)toGray:(UIImage *)image;
++ (UIImage *)toGray:(UIImage *)image;
++ (UIImage *)getContours:(UIImage *)image;
 
 @end
 
