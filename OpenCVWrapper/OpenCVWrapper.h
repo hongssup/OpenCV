@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 //Function to convert an image to grayscale
 + (UIImage *)toGray:(UIImage *)image;
 + (UIImage *)getContours:(UIImage *)image;
++ (NSMutableArray *)getImageArray:(UIImage *)image;
 
 @end
 
